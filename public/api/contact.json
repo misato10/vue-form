@@ -1,0 +1,15 @@
+{
+  "code": 400,
+  "errors":{
+  "name":[
+  "required"
+  ],
+  "email":[
+  "email"
+  ],
+  "body":[
+  "invalid",
+  "㍉"
+  ]
+  }
+  }
