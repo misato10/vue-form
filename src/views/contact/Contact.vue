@@ -27,7 +27,7 @@
               maxlength="50"
               v-model="inputName"
             />
-            <p>{{ errors[0] }}</p>
+            <p class="error-txt">{{ errors[0] }}</p>
           </dd>
         </ValidationProvider>
         <ValidationProvider
@@ -47,9 +47,7 @@
               maxlength="100"
               v-model="inputEmail"
             />
-            <ul>
-              <li v-for="error in errors" :key="error">{{ error }}</li>
-            </ul>
+            <p v-for="error in errors" :key="error" class="error-txt">{{ error }}</p>
           </dd>
         </ValidationProvider>
         <ValidationProvider
@@ -69,11 +67,12 @@
               rows="10"
               v-model="inputInquiry"
             ></textarea>
-            <p>{{ errors[0] }}</p>
+            <p class="error-txt">{{ errors[0] }}</p>
           </dd>
         </ValidationProvider>
+        
 
-        <input type="submit" value="確認画面へ" />
+        <input class="btn" type="submit" value="確認画面へ" />
       </form>
     </ValidationObserver>
 
@@ -81,19 +80,20 @@
       <h2>確認</h2>
       <p>以下の内容でよろしければ「送信する」をクリックしてください。<br>内容を変更する場合は「戻る」をクリックして入力画面にお戻りください。</p>
       <form v-on:submit.prevent="onSubmitSend">
-        <dl class="confirm__box">
-          <dt class="confirm__ttl">お名前</dt>
+        <dl class="input__box">
+          <dt class="input__ttl">お名前</dt>
           <dd class="input__item">{{ inputName }}</dd>
         </dl>
-        <dl class="confirm__box">
-          <dt class="confirm__ttl">メールアドレス</dt>
+        <dl class="input__box">
+          <dt class="input__ttl">メールアドレス</dt>
           <dd class="input__item">{{ inputEmail }}</dd>
         </dl>
-        <dl class="confirm__box">
-          <dt class="confirm__ttl">お問い合わせ内容</dt>
+        <dl class="input__box">
+          <dt class="input__ttl">お問い合わせ内容</dt>
           <dd class="input__item">{{ inputInquiry }}</dd>
         </dl>
-        <input type="submit" value="送信する" />
+        <button class="btn" type="button" v-on:click.prevent="returnInput">戻る</button>
+        <input class="btn" type="submit" value="送信する" />
       </form>
     </div>
   </div>
@@ -142,6 +142,9 @@ export default {
       this.isFailure = false;
       this.isConfirm = true;
     },
+    returnInput() {
+      this.isConfirm = false;
+    },
     onSubmitSend() {
       let _this = this;
       const submitParams = new FormData();
@@ -187,9 +190,30 @@ export default {
 <style scoped>
 .input__box {
   display: flex;
+  padding: 20px 0;
+  margin: 0;
+}
+.input__box + .input__box {
+  border-top: 1px solid #ccc;
+}
+.input__item {
+  text-align: left;
+  width: 450px;
+}
+.input__item input, .input__item textarea {
+  width: 100%;
 }
 .input__ttl {
   width: 150px;
   text-align: left;
+  font-weight: bold;
+}
+.error-txt {
+  color: crimson;
+  font-size: 12px;
+  margin: 5px 0;
+}
+.btn {
+  margin: 0 20px;
 }
 </style>

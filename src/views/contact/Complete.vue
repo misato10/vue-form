@@ -4,6 +4,7 @@
     <h2>送信完了</h2>
     <p>お問い合わせいただきありがとうございます。</p>
     <p>送信完了いたしました。</p>
+    <router-link to="/" tag="p" class="btn"><a>お問い合わせTOP</a></router-link>
   </div>
 </template>
 
@@ -13,11 +14,4 @@ export default {
 };
 </script>
 <style scoped>
-.input__box {
-  display: flex;
-}
-.input__ttl {
-  width: 150px;
-  text-align: left;
-}
 </style>
